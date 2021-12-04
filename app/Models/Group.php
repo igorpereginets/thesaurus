@@ -6,16 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Word extends Model
+class Group extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name'
-    ];
-
-    public function groups(): BelongsToMany
+    public function words(): BelongsToMany
     {
-        return $this->belongsToMany(Group::class, 'word_groups');
+        return $this->belongsToMany(Word::class, 'word_groups');
     }
 }
