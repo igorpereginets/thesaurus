@@ -24,8 +24,14 @@ class ThesaurusService implements Thesaurus
                 if (is_string($synonym) && $synonym !== '') { //TODO All of them are empty?
                     $word = Word::firstOrCreate(['name' => strtolower($synonym)]);
 
-                    $wordsResponse->add($word);
+                    $wordsResponse->put($word->id, $word);
                 }
+            }
+
+            // If all words in one group - do nothing
+            if ($wordsResponse->count() <= 1 || $this->haveCommonGroup($wordsResponse)) {
+                \DB::rollBack();
+                return;
             }
 
             Group::create()->words()->sync($wordsResponse->pluck('id'));
@@ -55,5 +61,19 @@ class ThesaurusService implements Thesaurus
     public function getWords(): array
     {
         return Word::pluck('name')->toArray();
+    }
+
+    /**
+     * Check if words have at least one common group
+     *
+     * @param Collection $words
+     *
+     * @return bool
+     */
+    private function haveCommonGroup(Collection $words): bool
+    {
+        $wordGroups = $words->map(fn($e) => $e->groups()->allRelatedIds());
+
+        return $wordGroups->pop()->intersect(...$wordGroups)->isNotEmpty();
     }
 }
