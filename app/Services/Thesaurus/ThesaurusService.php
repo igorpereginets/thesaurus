@@ -21,7 +21,7 @@ class ThesaurusService implements Thesaurus
         \DB::beginTransaction();
         try {
             foreach ($synonyms as $synonym) {
-                if (is_string($synonym) && $synonym !== '') { //TODO All of them are empty?
+                if (is_string($synonym) && $synonym !== '') {
                     $word = Word::firstOrCreate(['name' => strtolower($synonym)]);
 
                     $wordsResponse->put($word->id, $word);
