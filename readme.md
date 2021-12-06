@@ -106,25 +106,24 @@ Install Docker Engine
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
    git clone https://github.com/igorpereginets/thesaurus
    cd ./thesaurus
    ```
-3. Copy .env file
+2. Copy .env file
    ```sh
    cp .env.example .env
    ```
-4. Install all packages
+3. Install all packages
    ```sh
    composer install
    ```
-5. Run server via docker-compose
+4. Run server via docker-compose
     ```sh
    docker-compose up -d
    ```
-6. Run migrations
+5. Run migrations
     ```sh
    docker-compose exec -u sail app php artisan migrate
    ```
