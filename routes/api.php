@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\ThesaurusController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,3 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/words', [ThesaurusController::class, 'getWords']);
+Route::get('/word/synonyms', [ThesaurusController::class, 'getSynonyms']);
+Route::post('/word/synonyms', [ThesaurusController::class, 'addSynonyms']);
