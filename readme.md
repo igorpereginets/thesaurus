@@ -103,6 +103,8 @@ Install Docker Engine
   ```sh
   docker-compose --version
   ```
+* Documentation <br>
+  To check Swagger documentation open this [URL](http://localhost/api/docs) in browser
 
 ### Installation
 
